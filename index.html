@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Infromation My Safety</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .game-container {
+        max-width: 850px;
+        margin: auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 20px;
+      }
+  
+      h1 {
+        color: #174b7a;
+        margin-bottom: 5px;
+      }
+  
+      .instructions {
+        font-size: 18px;
+        color: #444;
+        margin-bottom: 25px;
+      }
+  
+      .score {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+  
+      .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 30px;
+      }
+  
+      .info-card {
+        background-color: #fff4c7;
+        border: 3px solid #e4b93f;
+        border-radius: 12px;
+        padding: 15px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+        min-width: 150px;
+        transition: 0.2s;
+      }
+  
+      .info-card:hover {
+        transform: scale(1.05);
+      }
+  
+      .info-card.selected {
+        background-color: #ffe27a;
+        border-color: #b98300;
+        transform: scale(1.05);
+      }
+  
+      .areas {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+  
+      .drop-area {
+        width: 300px;
+        min-height: 190px;
+        padding: 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        border: 4px dashed;
+        transition: 0.2s;
+      }
+  
+      .drop-area:hover {
+        transform: scale(1.03);
+      }
+  
+      .privacy {
+        background-color: #e1f2ff;
+        border-color: #2781c2;
+      }
+  
+      .sharing {
+        background-color: #e8f8e8;
+        border-color: #48a84f;
+      }
+  
+      .big-icon {
+        font-size: 65px;
+      }
+  
+      .drop-area h2 {
+        margin: 8px 0;
+      }
+  
+      #message {
+        margin-top: 25px;
+        padding: 15px;
+        background-color: #f4f4f4;
+        border-radius: 12px;
+        font-size: 17px;
+        min-height: 25px;
+      }
+  
+      #finish {
+        display: none;
+        margin-top: 25px;
+        background-color: #fff6cf;
+        padding: 25px;
+        border-radius: 15px;
+      }
+  
+      #finish h2 {
+        color: #174b7a;
+      }
+  
+      .restart {
+        background-color: #174b7a;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 13px 22px;
+        font-size: 17px;
+        cursor: pointer;
+      }
+  
+      .restart:hover {
+        background-color: #0e3659;
+      }
+  
+      @media (max-width: 650px) {
+        .areas {
+          flex-direction: column;
+          align-items: center;
+        }
+  
+        .drop-area {
+          width: 85%;
+        }
+      }
+
+      <style>
+  /* QUIZ SECTION */
+  .quiz-section {
+    background: #FFD93B;
+    padding: 60px 20px;
+    margin-top: 40px;
+    scroll-margin-top: 80px;
+    font-family: Arial, sans-serif;
+    color: #2B2340;
+  }
+  
+  .quiz-container {
+    max-width: 900px;
+    margin: auto;
+  }
+  
+  .quiz-step {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+  }
+  
+  .quiz-section h2 {
+    font-size: clamp(30px, 5vw, 48px);
+    margin-bottom: 12px;
+  }
+  
+  .quiz-intro {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  
+  .quiz-question {
+    background: white;
+    border: 3px solid #2B2340;
+    border-radius: 22px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 6px 6px 0 #2B2340;
+  }
+  
+  .quiz-question h3 {
+    font-size: 20px;
+    margin: 0 0 18px;
+    line-height: 1.4;
+  }
+  
+  .quiz-question label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #F7F4FF;
+    border: 2px solid #D6D0E5;
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 10px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .quiz-question label:hover {
+    background: #E5DFFF;
+  }
+  
+  .quiz-question label:has(input:checked) {
+    background: #C7B9FF;
+    border-color: #2B2340;
+  }
+  
+  .quiz-question input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #7B5CFF;
+    flex-shrink: 0;
+  }
+  
+  .feedback {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 12px 0 0;
+  }
+  
+  .feedback.correct {
+    color: #16734A;
+  }
+  
+  .feedback.incorrect {
+    color: #B42318;
+  }
+  
+  .score-button,
+  .retry-button {
+    display: block;
+    width: 100%;
+    border: 3px solid #2B2340;
+    border-radius: 16px;
+    padding: 17px;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 5px 5px 0 #2B2340;
+    margin-top: 20px;
+  }
+  
+  .score-button {
+    background: #7B5CFF;
+    color: white;
+  }
+  
+  .retry-button {
+    background: #9BE7C4;
+    color: #2B2340;
+  }
+  
+  .score-button:hover,
+  .retry-button:hover {
+    transform: translateY(-2px);
+  }
+  
+  .quiz-result {
+    background: white;
+    border: 3px solid #2B2340;
+    border-radius: 20px;
+    padding: 25px;
+    margin-top: 25px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  [hidden] {
+    display: none !important;
+  }
+  
+  @media (max-width: 600px) {
+    .quiz-question {
+      padding: 18px;
+    }
+  
+    .quiz-question h3 {
+      font-size: 18px;
+    }
+  
+    .quiz-question label {
+      font-size: 16px;
+    }
+  }
+  </style>
+    </style>
+  </head>
+
+  <body>
+    <!--Header--> 
+    <header>
+      <div class="lock">🔒</div>
+      <h1>My Information, My Safety!</h1>
+      <p>
+        Let's learn what information is safe to share and what information we
+        should keep private.
+      </p>
+      <strong>Early primary Years • Ages 5-8</strong>
+    </header>
+     <!--Navigation--> 
+    <nav>
+      <a href="#watch">Watch & Learn</a>
+      <a href="#explore">Explore</a>
+      <a href="#activity">Play</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+    <main>
+      <!--Welcome-->
+      <section>
+        <h2>👋 Welcome!</h2>
+        <p>Today we are learning how to stay safe when we use computers, tablets and the internet. Some information is personal. 
+          Before sharing personal information online, stop and ask a trusted adult.
+        </p>
+        <p> 
+          <strong>Learning goal:</strong>
+           I can identify personal information and know when I should ask a trusted adult before sharing it online.
+        </p>
+      </section>
+
+      <!--Watch and learn-->
+      <section id="watch" aria-labelledby="watch-h" style="background:#FFD93B;margin-top:40px;padding:clamp(40px,7vw,80px) clamp(14px,4vw,48px);scroll-margin-top:80px">
+        <div style="max-width:1120px;margin:0 auto">
+          <p style="margin:0 0 8px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:14px">Step 1 · Watch & Learn</p>
+          <h2 id="watch-h" style="font-size:clamp(30px,5vw,52px);font-weight:700;margin-bottom:24px">Watch the video</h2>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:28px;align-items:start">
+            <figure style="margin:0;background:#2B2340;border-radius:24px;padding:8px;box-shadow:8px 8px 0 #FF6B57">
+              
+              <iframe title="Lesson video: My information is mine" src="https://www.youtube.com/embed/lKS3wuI7o6c" style="display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:18px" allow="accelerometer; encrypted-media; picture-in-picture" allowfullscreen="true"></iframe>
+
+              <figcaption style="padding:10px 8px 4px;color:#FFD93B;font-weight:700;font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px"><span>Under 3 minutes · captions on · press CC if you don't see words</span><span>When it ends, scroll down to Step 2.</span></figcaption>
+            </figure>
+            <div style="background:#fff;border:3px solid #2B2340;border-radius:28px;padding:24px;box-shadow:6px 6px 0 #2B2340">
+              <h3 style="font-size:26px;font-weight:600;margin-bottom:14px">Listen for these three things</h3>
+              <ol style="margin:0 0 20px;padding:0;list-style:none;display:grid;gap:12px;font-weight:600">
+                <li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:32px;height:32px;border-radius:50%;background:#FF6B57;color:#fff;display:grid;place-items:center;font-weight:800">1</span><span><strong>Private information</strong> — things about me that are just for me and my family.</span></li>
+                <li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:32px;height:32px;border-radius:50%;background:#0E8C8C;color:#fff;display:grid;place-items:center;font-weight:800">2</span><span><strong>Stop and think</strong> — before I type or tap, I stop.</span></li>
+                <li style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:32px;height:32px;border-radius:50%;background:#7B5CFF;color:#fff;display:grid;place-items:center;font-weight:800">3</span><span><strong>Tell a trusted grown-up</strong> — Mum, Dad, a carer or my teacher.</span></li>
+              </ol>
+              <p style="margin:0 0 10px;font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:#E0458B">Keep these private</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <span style="background:#FFB3C7;border:2px solid #2B2340;border-radius:999px;padding:6px 12px;font-weight:800;font-size:15px">My full name</span><span style="background:#9BE7C4;border:2px solid #2B2340;border-radius:999px;padding:6px 12px;font-weight:800;font-size:15px">Where I live</span><span style="background:#C7B9FF;border:2px solid #2B2340;border-radius:999px;padding:6px 12px;font-weight:800;font-size:15px">My school</span><span style="background:#9ED8FF;border:2px solid #2B2340;border-radius:999px;padding:6px 12px;font-weight:800;font-size:15px">My birthday</span><span style="background:#FFD93B;border:2px solid #2B2340;border-radius:999px;padding:6px 12px;font-weight:800;font-size:15px">Phone number</span><span style="background:#FFB3C7;border:2px solid #2B2340;border-radius:999px;padding:6px 12px;font-weight:800;font-size:15px">Passwords</span><span style="background:#9BE7C4;border:2px solid #2B2340;border-radius:999px;padding:6px 12px;font-weight:800;font-size:15px">Photos of me</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!--Look-->
+      <section id="explore" aria-labelledby="explore-h" style="max-width:1120px;margin:0 auto;padding:clamp(40px,7vw,80px) clamp(14px,4vw,48px);scroll-margin-top:80px">
+        <p style="margin:0 0 8px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:14px;color:#0E8C8C">Step 2 · Look</p>
+        <h2 id="explore-h" style="font-size:clamp(30px,5vw,52px);font-weight:700;margin-bottom:10px">Four fun places to look</h2>
+        <p style="margin:0 0 28px;max-width:60ch;font-weight:600">Pick two with your grown-up. Each button opens a new tab. Spend about 5 to 10 minutes on each one, do the job on the card, then close the tab and come back here for Step 3.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:22px">
+          <article style="background:#fff;border:3px solid #2B2340;border-radius:28px;overflow:hidden;box-shadow:6px 6px 0 #FFD93B;display:flex;flex-direction:column">
+            <div style="background:#FFD93B;padding:14px 20px;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.08em;border-bottom:3px solid #2B2340">Look 1 · Video · Learn 1</div>
+            <div style="padding:18px 20px 22px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;flex:1">
+              <h3 style="font-size:26px;font-weight:600">Sheriff Labrador Kids Cartoon</h3>
+              <p style="margin:0;font-size:16px">Cartoon episodes for ages 5–10 from Sheriff Labrador Kids Cartoon.</p>
+              <p style="margin:0;font-size:16px;font-weight:800;color:#B8860B">Your job (5 min): watch video, then say Where mr. Fox get all the information from about little monkey.</p>
+              <a href="https://www.youtube.com/watch?v=scokZPIQdUE" target="_blank" rel="noopener" style="margin-top:auto;justify-self:start;text-decoration:none;background:#2B2340;color:#fff;font-weight:800;padding:10px 20px;border-radius:999px;min-height:46px;display:inline-flex;align-items:center">Watch The Video</a>
+            </div>
+          </article>
+          <article style="background:#fff;border:3px solid #2B2340;border-radius:28px;overflow:hidden;box-shadow:6px 6px 0 #9BE7C4;display:flex;flex-direction:column">
+            <div style="background:#9BE7C4;padding:14px 20px;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.08em;border-bottom:3px solid #2B2340">Look 2 · Story · Learn 1</div>
+            <div style="padding:18px 20px 22px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;flex:1">
+              <h3 style="font-size:26px;font-weight:600">Swoosh, Glide and Rule Number 5</h3>
+              <p style="margin:0;font-size:16px">A picture book from eSafety about two bird friends who learn to keep their information safe. Read it aloud together.</p>
+              <p style="margin:0;font-size:16px;font-weight:800;color:#0E8C8C">Your job (5 min): read it together, then say rule number 5 in your own words.</p>
+              <a href="https://www.esafety.gov.au/educators/classroom-resources/swoosh-glide-and-rule-number-5" target="_blank" rel="noopener" style="margin-top:auto;justify-self:start;text-decoration:none;background:#2B2340;color:#fff;font-weight:800;padding:10px 20px;border-radius:999px;min-height:46px;display:inline-flex;align-items:center">Read the story</a>
+            </div>
+          </article>
+          <article style="background:#fff;border:3px solid #2B2340;border-radius:28px;overflow:hidden;box-shadow:6px 6px 0 #C7B9FF;display:flex;flex-direction:column">
+            <div style="background:#C7B9FF;padding:14px 20px;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.08em;border-bottom:3px solid #2B2340">Look 3 · Videos · Learn 2</div>
+            <div style="padding:18px 20px 22px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;flex:1">
+              <h3 style="font-size:26px;font-weight:600">Mighty Heroes</h3>
+              <p style="margin:0;font-size:16px">Short videos from eSafety and ABC Kids. Wanda the Echidna shows how to keep personal information safe.</p>
+              <p style="margin:0;font-size:16px;font-weight:800;color:#7B5CFF">Your job (10 min): watch Wanda's video, then say what Wanda keeps private.</p>
+              <a href="https://www.esafety.gov.au/educators/classroom-resources/mighty-heroes/online-safety-superpowers/students" target="_blank" rel="noopener" style="margin-top:auto;justify-self:start;text-decoration:none;background:#2B2340;color:#fff;font-weight:800;padding:10px 20px;border-radius:999px;min-height:46px;display:inline-flex;align-items:center">Meet the heroes</a>
+            </div>
+          </article>
+          <article style="background:#fff;border:3px solid #2B2340;border-radius:28px;overflow:hidden;box-shadow:6px 6px 0 #FFB3C7;display:flex;flex-direction:column">
+            <div style="background:#FFB3C7;padding:14px 20px;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.08em;border-bottom:3px solid #2B2340">Look 4 · Website · Learn 3</div>
+            <div style="padding:18px 20px 22px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;flex:1">
+              <h3 style="font-size:26px;font-weight:600">eSafety Kids</h3>
+              <p style="margin:0;font-size:16px">The eSafety Commissioner's page for kids. It shows what to do, and who to tell, when something online feels wrong.</p>
+              <p style="margin:0;font-size:16px;font-weight:800;color:#E0458B">Your job (5 min): look at the kids page, then name two grown-ups you trust.</p>
+              <a href="https://www.esafety.gov.au/kids/I-want-help-with/being-safe-online" target="_blank" rel="noopener" style="margin-top:auto;justify-self:start;text-decoration:none;background:#2B2340;color:#fff;font-weight:800;padding:10px 20px;border-radius:999px;min-height:46px;display:inline-flex;align-items:center">Open eSafety Kids</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    
+
+      <!--Play-->
+      <section id="activity" class="activity">
+        <div class="game-container">
+
+          <h1>🛡️ Build Your Privacy Shield</h1>
+        
+          <p class="instructions">
+            Choose an information card. Then decide where it belongs.
+            Protect personal information with the Privacy Shield!
+          </p>
+        
+          <div class="score">
+            🛡️ Shield Pieces:
+            <span id="score">0</span> / 5
+          </div>
+        
+          <!-- Information cards -->
+        
+          <div class="cards" id="cards">
+        
+            <button class="info-card"
+              data-private="true">
+              🏠 Home Address
+            </button>
+        
+            <button class="info-card"
+              data-private="false">
+              🎨 Favourite Colour
+            </button>
+        
+            <button class="info-card"
+              data-private="true">
+              🔑 Password
+            </button>
+        
+            <button class="info-card"
+              data-private="false">
+              🐶 Favourite Animal
+            </button>
+        
+            <button class="info-card"
+              data-private="true">
+              📱 Phone Number
+            </button>
+        
+            <button class="info-card"
+              data-private="false">
+              🍕 Favourite Food
+            </button>
+        
+            <button class="info-card"
+              data-private="true">
+              🏫 School Name
+            </button>
+        
+            <button class="info-card"
+              data-private="false">
+              ⚽ Favourite Sport
+            </button>
+        
+            <button class="info-card"
+              data-private="true">
+              🎂 Full Birthday
+            </button>
+        
+            <button class="info-card"
+              data-private="false">
+              📚 Favourite Book
+            </button>
+        
+          </div>
+        
+          <!-- Sorting areas -->
+        
+          <div class="areas">
+        
+            <div class="drop-area privacy" id="privacyArea">
+        
+              <div class="big-icon">🛡️</div>
+        
+              <h2>Privacy Shield</h2>
+        
+              <p>
+                Put personal information here to protect it.
+              </p>
+        
+            </div>
+        
+        
+            <div class="drop-area sharing" id="sharingArea">
+        
+              <div class="big-icon">💬</div>
+        
+              <h2>Everyday Sharing</h2>
+        
+              <p>
+                Put information here that is usually okay to talk about.
+              </p>
+        
+            </div>
+        
+          </div>
+        
+        
+          <!-- Feedback -->
+        
+          <div id="message">
+        
+            👆 Choose an information card to begin.
+        
+          </div>
+        
+        
+          <!-- Finished message -->
+        
+          <div id="finish">
+        
+            <div style="font-size:60px;">
+              🛡️ ⭐
+            </div>
+        
+            <h2>
+              Your Privacy Shield is Complete!
+            </h2>
+        
+            <p>
+              Great work! You protected the important personal information.
+            </p>
+        
+            <p>
+              <strong>Remember:</strong>
+              Stop and ask a trusted adult before sharing personal
+              information online.
+            </p>
+        
+            <button class="restart" onclick="restartGame()">
+              Play Again
+            </button>
+        
+          </div>
+        
+        </div>
+      </section>
+
+
+      <!--Qiuze Question-->
+      <section id="quiz" class="quiz-section" aria-labelledby="quiz-heading">
+
+        <div class="quiz-container">
+      
+          <p class="quiz-step">STEP 4 · QUIZ</p>
+      
+          <h2 id="quiz-heading">⭐ Check Your Learning</h2>
+      
+          <p class="quiz-intro">
+            Choose the best answer for each question.
+          </p>
+      
+          <form id="privacyQuiz">
+      
+            <div class="quiz-question">
+              <h3>1. A game asks for your password. What should you do?</h3>
+              <label><input type="radio" name="q1" value="a"> Tell the game</label>
+              <label><input type="radio" name="q1" value="b"> Keep it private and ask an adult</label>
+              <label><input type="radio" name="q1" value="c"> Tell another player</label>
+              <p class="feedback" id="feedback1"></p>
+            </div>
+      
+            <div class="quiz-question">
+              <h3>2. Which information should you keep private?</h3>
+              <label><input type="radio" name="q2" value="a"> Your home address</label>
+              <label><input type="radio" name="q2" value="b"> Your favourite colour</label>
+              <label><input type="radio" name="q2" value="c"> Your favourite animal</label>
+              <p class="feedback" id="feedback2"></p>
+            </div>
+      
+            <div class="quiz-question">
+              <h3>3. Someone online asks for your photo. What should you do?</h3>
+              <label><input type="radio" name="q3" value="a"> Send it straight away</label>
+              <label><input type="radio" name="q3" value="b"> Ask a trusted adult first</label>
+              <label><input type="radio" name="q3" value="c"> Send lots of photos</label>
+              <p class="feedback" id="feedback3"></p>
+            </div>
+      
+            <div class="quiz-question">
+              <h3>4. Who can help you make safe choices online?</h3>
+              <label><input type="radio" name="q4" value="a"> A trusted adult</label>
+              <label><input type="radio" name="q4" value="b"> A stranger online</label>
+              <label><input type="radio" name="q4" value="c"> Anyone in a game</label>
+              <p class="feedback" id="feedback4"></p>
+            </div>
+      
+            <div class="quiz-question">
+              <h3>5. What should you do before sharing personal information online?</h3>
+              <label><input type="radio" name="q5" value="a"> Stop, think and ask an adult</label>
+              <label><input type="radio" name="q5" value="b"> Share it quickly</label>
+              <label><input type="radio" name="q5" value="c"> Post it everywhere</label>
+              <p class="feedback" id="feedback5"></p>
+            </div>
+      
+            <button type="submit" class="score-button">
+              ⭐ See My Score
+            </button>
+      
+            <div id="quizResult" class="quiz-result" role="status" aria-live="polite" hidden></div>
+      
+            <button type="button" id="retryButton" class="retry-button" hidden>
+              🔄 Try Again
+            </button>
+      
+          </form>
+        </div>
+      </section>
+
+
+      
+      <section class="finish">
+        <h2>🎉 Great Work!</h2>
+        <p><strong>Remember: Stop, Think and Ask a Trusted Adult before sharing personal information online.</strong>
+        </p>
+        <div style="font-size:3rem">🛑 💭 🧑‍🏫 🔒</div>
+      </section>
+      </main>
+
+  </body>
+  <script>
+
+  let selectedCard = null;
+
+  let completedCards = 0;
+
+  let protectedCards = 0;
+
+
+  const cards =
+    document.querySelectorAll(".info-card");
+
+  const message =
+    document.getElementById("message");
+
+  const score =
+    document.getElementById("score");
+
+  const finish =
+    document.getElementById("finish");
+
+
+  /* Select a card */
+
+  cards.forEach(function(card) {
+
+    card.addEventListener("click", function() {
+
+      cards.forEach(function(otherCard) {
+        otherCard.classList.remove("selected");
+      });
+
+      selectedCard = card;
+
+      card.classList.add("selected");
+
+      message.innerHTML =
+        "You selected <strong>" +
+        card.innerText +
+        "</strong>.<br>" +
+        "Now choose where it belongs.";
+
+    });
+
+  });
+
+
+  /* Privacy Shield */
+
+  document
+    .getElementById("privacyArea")
+    .addEventListener("click", function() {
+
+      checkAnswer(true);
+
+    });
+
+
+  /* Everyday Sharing */
+
+  document
+    .getElementById("sharingArea")
+    .addEventListener("click", function() {
+
+      checkAnswer(false);
+
+    });
+
+
+  function checkAnswer(chosenPrivate) {
+
+    if (selectedCard === null) {
+
+      message.innerHTML =
+        "👆 Choose an information card first.";
+
+      return;
+    }
+
+
+    const isPrivate =
+      selectedCard.dataset.private === "true";
+
+
+    /* Correct choice */
+
+    if (chosenPrivate === isPrivate) {
+
+      if (isPrivate) {
+
+        protectedCards++;
+
+        score.innerText =
+          protectedCards;
+
+        message.innerHTML =
+          "🛡️ <strong>Great protection!</strong><br>" +
+          "This information should be kept private.";
+
+      }
+
+      else {
+
+        message.innerHTML =
+          "💬 <strong>Good choice!</strong><br>" +
+          "This is usually okay to talk about.";
+
+      }
+
+
+      selectedCard.style.display = "none";
+
+      selectedCard.classList.remove("selected");
+
+      selectedCard = null;
+
+      completedCards++;
+
+
+      /* Check if game is finished */
+
+      if (completedCards === cards.length) {
+
+        finish.style.display = "block";
+
+        message.innerHTML =
+          "🎉 You finished all the information cards!";
+
+      }
+
+    }
+
+
+    /* Wrong choice */
+
+    else {
+
+      if (isPrivate) {
+
+        message.innerHTML =
+          "🔍 <strong>Think again!</strong><br>" +
+          "This information could help someone identify, " +
+          "contact or find you.";
+
+      }
+
+      else {
+
+        message.innerHTML =
+          "🔍 <strong>Think again!</strong><br>" +
+          "This is everyday information that is usually " +
+          "safe to talk about.";
+
+      }
+
+    }
+
+  }
+
+
+  /* Restart game */
+
+  function restartGame() {
+
+    selectedCard = null;
+
+    completedCards = 0;
+
+    protectedCards = 0;
+
+    score.innerText = "0";
+
+    finish.style.display = "none";
+
+    cards.forEach(function(card) {
+
+      card.style.display = "block";
+
+      card.classList.remove("selected");
+
+    });
+
+    message.innerHTML =
+      "👆 Choose an information card to begin.";
+
+  }
+  
+  
+  (function () {
+    const quiz = document.getElementById("privacyQuiz");
+    if (!quiz) return;
+  
+    const correctAnswers = {
+      q1: "b",
+      q2: "a",
+      q3: "b",
+      q4: "a",
+      q5: "a"
+    };
+  
+    const answerText = {
+      q1: "Keep it private and ask an adult",
+      q2: "Your home address",
+      q3: "Ask a trusted adult first",
+      q4: "A trusted adult",
+      q5: "Stop, think and ask an adult"
+    };
+  
+    const result = document.getElementById("quizResult");
+    const retryButton = document.getElementById("retryButton");
+    const scoreButton = quiz.querySelector(".score-button");
+  
+    quiz.addEventListener("submit", function (event) {
+      event.preventDefault();
+  
+      let score = 0;
+  
+      // Make sure every question has been answered.
+      for (let i = 1; i <= 5; i++) {
+        const selected = quiz.querySelector(
+          `input[name="q${i}"]:checked`
+        );
+  
+        if (!selected) {
+          alert("Please answer all five questions first!");
+          quiz.querySelector(
+            `input[name="q${i}"]`
+          ).focus();
+          return;
+        }
+      }
+  
+      // Mark answers automatically.
+      for (let i = 1; i <= 5; i++) {
+        const question = "q" + i;
+        const selected = quiz.querySelector(
+          `input[name="${question}"]:checked`
+        );
+  
+        const feedback = document.getElementById(
+          "feedback" + i
+        );
+  
+        if (selected.value === correctAnswers[question]) {
+          score++;
+          feedback.textContent = "✅ Correct! Well done!";
+          feedback.className = "feedback correct";
+        } else {
+          feedback.textContent =
+            "❌ Let's learn! Correct answer: " +
+            answerText[question];
+          feedback.className = "feedback incorrect";
+        }
+      }
+  
+      let message = "";
+  
+      if (score === 5) {
+        message = "🌟 Amazing! You are a Privacy Star!";
+      } else if (score >= 3) {
+        message = "👏 Great effort! Keep learning!";
+      } else {
+        message = "💜 Good try! Let's practise again!";
+      }
+  
+      result.innerHTML =
+        "<h3>Your Score: " + score + " / 5</h3>" +
+        "<p>" + message + "</p>";
+  
+      result.hidden = false;
+      retryButton.hidden = false;
+      scoreButton.hidden = true;
+  
+      // Lock answers after submission.
+      quiz.querySelectorAll('input[type="radio"]').forEach(
+        input => input.disabled = true
+      );
+  
+      result.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    });
+  
+    retryButton.addEventListener("click", function () {
+      quiz.reset();
+  
+      quiz.querySelectorAll('input[type="radio"]').forEach(
+        input => input.disabled = false
+      );
+  
+      for (let i = 1; i <= 5; i++) {
+        const feedback = document.getElementById(
+          "feedback" + i
+        );
+        feedback.textContent = "";
+        feedback.className = "feedback";
+      }
+  
+      result.hidden = true;
+      retryButton.hidden = true;
+      scoreButton.hidden = false;
+  
+      document.getElementById("quiz-heading").scrollIntoView({
+        behavior: "smooth"
+      });
+    });
+  })();
+  
+
+</script>
+<script src="./script.js"></script>
+
+</html>
+
+</body>
+</html>
